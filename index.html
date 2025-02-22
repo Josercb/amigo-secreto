@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amigo Secreto</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="main-content">
+    <!-- Banner -->
+    <div class="header-banner">
+      <h1 class="main-title">Amigo Secreto</h1>
+    </div>
+
+    <!-- Seção de entrada -->
+    <div class="input-section">
+      <h2 class="section-title">Adicionar Participantes</h2>
+
+      <!-- Contêiner de entrada e botão -->
+      <div class="input-wrapper">
+        <input type="text" id="participantName" class="input-name" placeholder="Nome do participante">
+        <button class="button-add" onclick="addParticipant()">Adicionar</button>
+      </div>
+
+      <!-- Lista de participantes -->
+      <div id="participants" class="result-list"></div>
+
+      <!-- Botão de sortear -->
+      <!-- Botão de sortear -->
+<!-- Botão de sortear -->
+<button class="button-primary" onclick="draw()">Realizar Sorteio</button>
+
+<!-- Botão de resetar -->
+<button class="button-primary" onclick="reset()">Criar Novo Sorteio</button>
+
+      <!-- Resultado do sorteio -->
+      <div id="result" class="result-list"></div>
+    </div>
+  </div>
+
+  <script>
+    // Lista para armazenar os participantes
+    let participants = [];
+
+    // Função para adicionar um participante
+    function addParticipant() {
+      const input = document.getElementById('participantName');
+      const name = input.value.trim();
+
+      if (name === "") {
+        alert("Por favor, insira um nome.");
+        return;
+      }
+
+      if (participants.includes(name)) {
+        alert("Esse nome já foi adicionado.");
+        return;
+      }
+
+      participants.push(name);
+      input.value = ""; // Limpa o campo de entrada
+      updateParticipantList();
+    }
+
+    // Função para atualizar a lista de participantes na interface
+    function updateParticipantList() {
+      const participantsDiv = document.getElementById('participants');
+      participantsDiv.innerHTML = "<h3>Participantes:</h3>";
+
+      participants.forEach((participant, index) => {
+        participantsDiv.innerHTML += `<div class="participant">${index + 1}. ${participant}</div>`;
+      });
+    }
+
+    // Função para realizar o sorteio
+    function draw() {
+      if (participants.length < 2) {
+        alert("É necessário pelo menos 2 participantes para realizar o sorteio.");
+        return;
+      }
+
+      // Embaralha os participantes
+      const shuffled = [...participants].sort(() => Math.random() - 0.5);
+
+      // Gera os pares de amigo secreto
+      const result = shuffled.map((participant, index) => {
+        const nextIndex = (index + 1) % shuffled.length;
+        return `${participant} -> ${shuffled[nextIndex]}`;
+      });
+
+      // Exibe o resultado
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = "<h3>Resultado do Sorteio:</h3>";
+      result.forEach(pair => {
+        resultDiv.innerHTML += `<div>${pair}</div>`;
+      });
+    }
+
+    // Função para criar um novo sorteio
+    function reset() {
+      participants = [];
+      document.getElementById('participants').innerHTML = "";
+      document.getElementById('result').innerHTML = "";
+      document.getElementById('participantName').value = "";
+    }
+  </script>
+</body>
+</html>
