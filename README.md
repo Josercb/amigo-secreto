@@ -20,10 +20,6 @@ Como Usar
 2.	Após adicionar todos os participantes, clique em "Realizar Sorteio" para ver os pares gerados.
 3.	Para começar um novo sorteio, clique em "Criar Novo Sorteio".
 
-Captura de Tela
-![Captura de Tela do Projeto](assets/amigo-secreto.png)
-
-
 Estrutura do Projeto
 •	index.html: Contém o código HTML do projeto.
 •	style.css: Contém os estilos do site (separado futuramente, atualmente no <style>).
